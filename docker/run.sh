@@ -91,7 +91,8 @@ parse_arguments() {
 set_variables() {
     if [ "$option_devel" = "true" ]; then
         # Set image based on option
-        IMAGE="ghcr.io/autowarefoundation/autoware:latest-devel"
+        #IMAGE="ghcr.io/autowarefoundation/autoware:latest-devel"
+        IMAGE="172.16.10.138:80/oss/autoware:devel-no-cuda"
 
         # Set workspace path, if not provided use the current directory
         if [ "$WORKSPACE_PATH" = "" ]; then
@@ -113,7 +114,8 @@ set_variables() {
         fi
     else
         # Set image based on option
-        IMAGE="ghcr.io/autowarefoundation/autoware:latest-runtime"
+        #IMAGE="ghcr.io/autowarefoundation/autoware:latest-runtime"
+        IMAGE="172.16.10.138:80/oss/autoware:runtime"
 
         # Set map path
         if [ "$MAP_PATH" = "" ]; then
@@ -138,7 +140,7 @@ set_gpu_flag() {
         GPU_FLAG=""
     else
         GPU_FLAG="--gpus all"
-        IMAGE=${IMAGE}-cuda
+        IMAGE=${IMAGE/-no}
     fi
 }
 
